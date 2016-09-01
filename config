@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Inconsolata, FontAwesome 12
+font pango:DejaVu Sans Mono, FontAwesome 11
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -181,7 +181,6 @@ bar {
   #}
 
   colors {
-    # solarized
     background #073642
     statusline #eee8d5
     focused_workspace #cb4b16 #cb4b16 #eee8d5
@@ -195,54 +194,50 @@ client.focused          #859900 #859900 #fdf6e3 #2e9ef4
 client.focused_inactive #268bd2 #268bd2 #fdf6e3 #484e50
 client.unfocused        #333333 #93a1a1 #fdf6e3 #292d2e
 
-# client.focused              #dfaf8f #dfaf8f #303030 #ffcfaf
-# client.focused_inactive     #3f3f3f #3F3F3F #7f9f7f #3f3f3f
-# client.unfocused            #3f3f3f #3F3F3F #DCDCCC #3f3f3f
-# client.urgent               #dca3a3 #dca3a3 #DCDCCC #3f3f3f
-
 # Rebind i3lock to [MOD+Shift+X]
 bindsym $mod+shift+x exec i3lock -i ~/Pictures/wheat2560x1440.png
 
 # File Manager Shortcut
-bindsym $mod+shift+f exec nemo
+bindsym $mod+shift+f exec thunar
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2% && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2% && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && pkill -RTMIN+10 i3blocks
 
+# MPC
 #bindsym XF86AudioNext exec --no-startup-id mpc -p 9876 next
 #bindsym XF86AudioPrev exec --no-startup-id mpc -p 9876 prev
 #bindsym XF86AudioStop exec --no-startup-id mpc -p 9876 stop
 #bindsym XF86AudioPlay exec --no-startup-id mpc -p 9876 toggle
 
-bindsym XF86AudioNext exec --no-startup-id wine "$HOME/.wine/drive_c/Program Files (x86)/foobar2000/foobar2000.exe" /next
-bindsym XF86AudioPrev exec --no-startup-id wine "$HOME/.wine/drive_c/Program Files (x86)/foobar2000/foobar2000.exe" /prev
-bindsym XF86AudioStop exec --no-startup-id wine "$HOME/.wine/drive_c/Program Files (x86)/foobar2000/foobar2000.exe" /stop
-bindsym XF86AudioPlay exec --no-startup-id wine "$HOME/.wine/drive_c/Program Files (x86)/foobar2000/foobar2000.exe" /playpause
+bindsym XF86AudioNext exec --no-startup-id foobar2000 -next
+bindsym XF86AudioPrev exec --no-startup-id foobar2000 -prev
+bindsym XF86AudioStop exec --no-startup-id foobar2000 -stop
+bindsym XF86AudioPlay exec --no-startup-id foobar2000 -playpause
 
 # Wallpaper
 exec_always feh --bg-scale ~/Pictures/wheat2560x1440.jpg
 
 # Assign applications to workspaces
-assign [class="google-chrome"] $WS1
+assign [class="google-chrome" window_role="browser"] $WS1
 assign [class="discord"] $WS8
 assign [class="Thunderbird"] $WS9
-assign [class="Deadbeef"] $WS10
-assign [class="foobar2000.exe"] $WS10
+assign [title="foobar2000"] $WS10
 
 # Enable auto floating mode
+for_window [class="google-chrome" window_role="pop-up"] floating enable
 for_window [class="mpv"] floating enable
-#for_window [class="Nemo"] floating enable
 for_window [class="Pulseaudio-equalizer.py"] floating enable
+for_window [class="Pavucontrol"] floating enable
+
+
 
 # Autostart
 # Set caps lock to escape
-exec setxkbmap -option caps:escape
+exec numlockx
 exec redshift
-exec sabnzbdplus
-exec mono --debug /opt/NzbDrone/NzbDrone.exe
 exec thunderbird
-exec google-chrome
-#exec /opt/deadbeef/bin/deadbeef
+exec foobar2000
+exec google-chrome-stable
 exec emacs --daemon

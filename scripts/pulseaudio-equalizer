@@ -1,0 +1,21 @@
+#!/bin/bash
+
+get_status() {
+  pulseaudio-equalizer status | awk 'NR==3 {print substr($3, 2, length($3)-2)}'
+}
+
+format() {
+  read status
+  if [ $status == "disabled" ]
+  then
+    echo '<span foreground="red"><b>EQ</b></span>'
+  else
+    echo '<span foreground="#00FF40"><b>EQ</b></span>'
+  fi
+}
+
+case $BLOCK_BUTTON in
+  1) pulseaudio-equalizer toggle 1> /dev/null;;
+esac
+
+get_status | format
