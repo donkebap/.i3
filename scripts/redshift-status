@@ -1,0 +1,27 @@
+#!/bin/bash
+
+function status {
+    pid=$(pgrep -x redshift)
+    if [ $pid -gt 0 ]
+    then
+	echo '<span foreground="#00FF40"><b>Redshift</b></span>'
+    else
+	echo '<span foreground="red"><b>Redshift</b></span>'
+    fi
+}
+
+function toggle_redshift {
+    pid=$(pgrep -x redshift)
+    if [ $pid -gt 0 ]
+    then
+	kill $pid
+    else
+	redshift &
+    fi
+}
+
+case $BLOCK_BUTTON in
+  1) toggle_redshift;;
+esac
+
+status
