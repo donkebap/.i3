@@ -137,8 +137,6 @@ bindsym $mod+Shift+0 move container to workspace $WS10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -208,8 +206,19 @@ client.focused_inactive $bg $darkgray $fg $purple $darkgray
 client.unfocused        $bg $darkgray $fg $purple $darkgray
 client.urgent           $red $red $white $red $red
 
-# Close window with middle mouse button
-#bindsym --release button2 kill
+# Power menu
+set $sysmenu "  [<b>r</b>]estart - [<b>l</b>]ogout - [<b>s</b>]uspend - re[<b>b</b>]oot - po[<b>w</b>]eroff  "
+bindsym $mod+Shift+e      mode $sysmenu
+
+mode --pango_markup $sysmenu {
+    bindsym r         restart
+    bindsym l         exit
+    bindsym w         exec "systemctl poweroff"
+    bindsym b         exec "systemctl reboot"
+    bindsym s         exec "systemctl suspend"
+    bindsym Return    mode "default"
+    bindsym Escape    mode "default"
+}
 
 # Toggle floating window with right mouse button
 bindsym button3 floating toggle
