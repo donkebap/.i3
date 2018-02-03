@@ -260,8 +260,7 @@ for_window [class="Pavucontrol"] floating enable
 # Autostart
 # Set caps lock to escape
 exec numlockx
-exec redshift
 exec thunderbird
-exec chromium
+exec firefox
 exec rssowl
 exec emacs --daemon

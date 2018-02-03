@@ -14,9 +14,9 @@ function toggle_redshift {
     pid=$(pgrep -x redshift)
     if [ $pid -gt 0 ]
     then
-	kill $pid
+	systemctl --user stop redshift.service
     else
-	redshift &
+	systemctl --user start redshift.service
     fi
 }
 
