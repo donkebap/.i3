@@ -105,7 +105,7 @@ set $WS1 "1:&#xf269;"
 set $WS2 "2:"
 set $WS3 "3:"
 set $WS4 "4:"
-set $WS5 "5:"
+set $WS5 "5"
 set $WS6 "6"
 set $WS7 "7:&#xf0e5;"
 set $WS8 "8:&#xf09e;"
@@ -227,7 +227,7 @@ mode --pango_markup $sysmenu {
 bindsym button3 floating toggle
 
 # Rebind i3lock to [MOD+Shift+X]
-bindsym $mod+shift+x exec ~/.i3/scripts/lock.sh
+bindsym $mod+shift+x exec i3lock -i ~/Pictures/wheat2560x1440.png
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -248,19 +248,14 @@ exec_always feh --bg-scale ~/Pictures/wheat2560x1440.jpg
 
 # Assign applications to workspaces
 assign [class="discord"] $WS7
-assign [class="RSSOwl"] $WS8
 assign [class="Thunderbird"] $WS9
-assign [title="foobar2000"] $WS10
-assign [class="Deadbeef"] $WS10
 
 # Enable auto floating mode
 for_window [class="mpv"] floating enable
 for_window [class="Pavucontrol"] floating enable
 
 # Autostart
-# Set caps lock to escape
 exec numlockx
 exec thunderbird
 exec firefox
-exec rssowl
 exec emacs --daemon
