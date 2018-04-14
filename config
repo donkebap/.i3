@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:sans-serif, FontAwesome 11
+font pango:Iosevka
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -112,28 +112,39 @@ set $WS8 "8:&#xf09e;"
 set $WS9 "9:&#xf003;"
 set $WS10 "10:&#xf025;"
 
+set $displayMode "Set display mode [1]only small [2]dual big [3]dual small [4]only big"
+bindsym $mod+x mode $displayMode
+mode $displayMode {
+	bindsym 1 exec ~/.config/i3/scripts/screens/only_small.sh && mode "default"
+	bindsym 2 exec ~/.config/i3/scripts/screens/dual_big.sh && mode "default"
+	bindsym 3 exec ~/.config/i3/scripts/screens/dual_small.sh && mode "default"
+	bindsym 4 exec ~/.config/i3/scripts/screens/only_big.sh && mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
 # switch to workspace
-bindsym $mod+1 workspace $WS1 
-bindsym $mod+2 workspace $WS2 
-bindsym $mod+3 workspace $WS3 
-bindsym $mod+4 workspace $WS4 
-bindsym $mod+5 workspace $WS5 
-bindsym $mod+6 workspace $WS6 
-bindsym $mod+7 workspace $WS7 
-bindsym $mod+8 workspace $WS8 
-bindsym $mod+9 workspace $WS9 
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
 bindsym $mod+0 workspace $WS10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $WS1 
-bindsym $mod+Shift+2 move container to workspace $WS2 
-bindsym $mod+Shift+3 move container to workspace $WS3 
-bindsym $mod+Shift+4 move container to workspace $WS4 
-bindsym $mod+Shift+5 move container to workspace $WS5 
-bindsym $mod+Shift+6 move container to workspace $WS6 
-bindsym $mod+Shift+7 move container to workspace $WS7 
-bindsym $mod+Shift+8 move container to workspace $WS8 
-bindsym $mod+Shift+9 move container to workspace $WS9 
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
 bindsym $mod+Shift+0 move container to workspace $WS10
 
 # reload the configuration file
@@ -189,7 +200,7 @@ bar {
   font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
   font pango:Inconsolata, FontAwesome 12
   position top
-  status_command i3blocks -c ~/.i3/i3blocks.conf
+  status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
   colors {
     background $bg
@@ -216,9 +227,9 @@ bindsym $mod+Shift+e      mode $sysmenu
 mode --pango_markup $sysmenu {
     bindsym r         restart
     bindsym l         exit
-    bindsym w         exec "systemctl poweroff"
-    bindsym b         exec "systemctl reboot"
-    bindsym s         exec "systemctl suspend"
+    bindsym w         exec "poweroff"
+    bindsym b         exec "reboot"
+    bindsym s         exec "suspend"
     bindsym Return    mode "default"
     bindsym Escape    mode "default"
 }
@@ -255,7 +266,5 @@ for_window [class="mpv"] floating enable
 for_window [class="Pavucontrol"] floating enable
 
 # Autostart
-exec numlockx
-exec thunderbird
+exec redshift
 exec firefox
-exec emacs --daemon
