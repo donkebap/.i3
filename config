@@ -101,7 +101,7 @@ bindsym $mod+Shift+Tab workspace prev
 #bindsym $mod+d focus child
 
 #FontAwesome
-set $WS1 "1:&#xf269;"
+set $WS1 "1:"
 set $WS2 "2:"
 set $WS3 "3:"
 set $WS4 "4:"
@@ -170,17 +170,18 @@ bindsym $mod+r mode "resize"
 ##########
 # Colors #
 ##########
-set_from_resource	$bg			background		#282828
-set_from_resource	$fg			foreground		#ebdbb2
+set	$bg		#282828
+set	$fg		#ebdbb2
 
-set_from_resource	$red			color1			#cc241d
-set_from_resource	$green			color2			#98971a
-set_from_resource	$yellow			color3			#d79921
-set_from_resource	$blue			color4			#458588
-set_from_resource	$purple			color5			#b16286
-set_from_resource	$aqua			color6			#689d6a
-set_from_resource	$gray			color7			#a89984
-set			$darkgray					#1d2021
+set	$red		#cc241d
+set	$green		#98971a
+set	$yellow		#d79921
+set	$blue		#458588
+set	$purple		#b16286
+set	$aqua		#689d6a
+set	$gray		#a89984
+set	$darkgray	#1d2021
+set	$white		#ffffff
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -189,7 +190,7 @@ bar {
   font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
   font pango:Inconsolata, FontAwesome 12
   position top
-  status_command i3blocks -c ~/.i3/i3blocks.conf
+  status_command i3blocks -c ~/.config/i3/i3blocks.conf
 
   colors {
     background $bg
@@ -252,10 +253,6 @@ assign [class="Thunderbird"] $WS9
 
 # Enable auto floating mode
 for_window [class="mpv"] floating enable
-for_window [class="Pavucontrol"] floating enable
 
 # Autostart
-exec numlockx
-exec thunderbird
-exec firefox
-exec emacs --daemon
+exec seq 0 3 | xargs -l1 -I@ /usr/bin/compton -CGb -d :0.@
