@@ -113,27 +113,27 @@ set $WS9 "9:&#xf003;"
 set $WS10 "10:&#xf025;"
 
 # switch to workspace
-bindsym $mod+1 workspace $WS1 
-bindsym $mod+2 workspace $WS2 
-bindsym $mod+3 workspace $WS3 
-bindsym $mod+4 workspace $WS4 
-bindsym $mod+5 workspace $WS5 
-bindsym $mod+6 workspace $WS6 
-bindsym $mod+7 workspace $WS7 
-bindsym $mod+8 workspace $WS8 
-bindsym $mod+9 workspace $WS9 
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
 bindsym $mod+0 workspace $WS10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $WS1 
-bindsym $mod+Shift+2 move container to workspace $WS2 
-bindsym $mod+Shift+3 move container to workspace $WS3 
-bindsym $mod+Shift+4 move container to workspace $WS4 
-bindsym $mod+Shift+5 move container to workspace $WS5 
-bindsym $mod+Shift+6 move container to workspace $WS6 
-bindsym $mod+Shift+7 move container to workspace $WS7 
-bindsym $mod+Shift+8 move container to workspace $WS8 
-bindsym $mod+Shift+9 move container to workspace $WS9 
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
 bindsym $mod+Shift+0 move container to workspace $WS10
 
 # reload the configuration file
@@ -210,20 +210,6 @@ client.focused_inactive $bg $darkgray $fg $purple $darkgray
 client.unfocused        $bg $darkgray $fg $purple $darkgray
 client.urgent           $red $red $white $red $red
 
-# Power menu
-set $sysmenu "  [<b>r</b>]estart - [<b>l</b>]ogout - [<b>s</b>]uspend - re[<b>b</b>]oot - po[<b>w</b>]eroff  "
-bindsym $mod+Shift+e      mode $sysmenu
-
-mode --pango_markup $sysmenu {
-    bindsym r         restart
-    bindsym l         exit
-    bindsym w         exec "systemctl poweroff"
-    bindsym b         exec "systemctl reboot"
-    bindsym s         exec "systemctl suspend"
-    bindsym Return    mode "default"
-    bindsym Escape    mode "default"
-}
-
 # Toggle floating window with right mouse button
 bindsym button3 floating toggle
 
@@ -238,3 +224,5 @@ bindsym $mod+minus scratchpad show
 
 # Wallpaper
 exec_always feh --bg-scale ~/Pictures/current_wallpaper
+
+exec --no-startup-id i3-battery-popup -n
